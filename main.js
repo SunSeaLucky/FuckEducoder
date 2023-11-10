@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         FuckEducoder
 // @namespace    http://tampermonkey.net/
-// @version      0.3
-// @description  Fuck educoder and tell their fucking developer who is the king!
+// @version      1.0
+// @description  This scipt is used for unfreezing educoder's copy restriction. Enjoy it!
 // @author       SunSeaLucky
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
