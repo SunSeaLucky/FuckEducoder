@@ -17,7 +17,7 @@ const min = 5000;
 
 // 目前设置随机时间的方法出现严重Bug，请谨慎使用！
 // 若仍想快速刷时间，请进入微信头歌小程序，在对应的实例界面左右滑动，可快速刷到int最大值
-setRandomTime = false;
+const setRandomTime = false;
 
 (function () {
     'use strict';
@@ -30,8 +30,8 @@ setRandomTime = false;
                     response.json = function () {
                         return new Promise((resolve, reject) => {
                             oldJson.apply(this, arguments).then((result) => {
-                                result.game.cost_time = Math.floor(Math.random() * (max - min + 1)) + min;
-                                if (setRandomTime) result.shixun.forbid_copy = false;
+                                if (setRandomTime) result.game.cost_time = Math.floor(Math.random() * (max - min + 1)) + min;
+                                result.shixun.forbid_copy = false;
                                 result.shixun.vip = true;
                                 resolve(result);
                             });
