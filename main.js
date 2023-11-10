@@ -45,5 +45,6 @@ const min = 5000;
             });
         });
     }
+    
     window.fetch = hookFetch;
 })();
