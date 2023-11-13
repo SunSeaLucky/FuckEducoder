@@ -37,6 +37,16 @@ const setRandomTime = false;
                             });
                         });
                     };
+                } else if (arguments[0].indexOf('rep_content') !== -1 && arguments[0].indexOf('tasks') !== -1) {
+                    const oldJson = response.json;
+                    response.json = function () {
+                        return new Promise((resolve, reject) => {
+                            oldJson.apply(this, arguments).then((result) => {
+                                result.content.content = 'c3VjY2VzcyE=';
+                                resolve(result);
+                            });
+                        });
+                    };
                 }
                 resolve(response);
             });
