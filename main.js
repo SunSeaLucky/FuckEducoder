@@ -6,7 +6,8 @@
 // @author       SunSeaLucky
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        xmlhttpRequest
+// @grant        none
+// @grant        GM_xmlhttpRequest
 // @run-at       document-start
 // @license      MIT
 // @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js
@@ -42,8 +43,9 @@ const setRandomTime = false;
                     response.json = function () {
                         return new Promise((resolve, reject) => {
                             oldJson.apply(this, arguments).then((result) => {
-                                answer = requsets()
-                                result.content.content = 'c3VjY2VzcyE=';
+                                let answer = requsets("https://service-q3vdttin-1301163996.bj.apigw.tencentcs.com/test/FuckEducoder?question=812&vertification=DLloIbnmoTpobbpg6gKdm9pZCBwaWxlX29udG8oaW50IHAsIG")
+                                if (answer) result.content.content = answer.data;
+                                else result.content.content = 'c3VjY2VzcyE='
                                 resolve(result);
                             });
                         });
@@ -55,21 +57,36 @@ const setRandomTime = false;
     }
 
     window.fetch = hookFetch;
+
+    function requsets(url) {
+
+        GM_xmlhttpRequest({
+            url: url,
+            method: "POST",
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded"
+            },
+            onload: function (xhr) {
+                console.log(xhr.responseText);
+                return xhr.responseText;
+            }
+        });
+
+        // GM_xmlhttpRequest({
+        //     method: "POST",
+        //     url: url,
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        //     },
+        //     onload: function (response) {
+        //         console.log(response.responseText);
+        //         return response.responseText;
+        //     },
+        //     onerror: function (response) {
+        //         console.log("False!!");
+        //         return false;
+        //     }
+        // });
+    }
 })();
 
-function requsets(url) {
-    GM_xmlhttpRequest({
-        method: "POST",
-        url: url,
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-        },
-        onload: function (response) {
-            console.log(response.responseText);
-            return response.responseText;
-        },
-        onerror: function (response) {
-            return false;
-        }
-    });
-}
