@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         FuckEducoder
 // @namespace    http://tampermonkey.net/
-// @version      1.1
-// @description  This scipt is used for unfreezing educoder's copy restriction. Enjoy it!
+// @version      1.2
+// @description  This scipt is used for unfreezing educoder's copy restriction.
 // @author       SunSeaLucky
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
@@ -12,11 +12,13 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js
 // ==/UserScript==
 
-const max = 30000;
-const min = 5000;
+//此为该脚本最后版本（可能），更新已停止
 
-// 目前设置随机时间的方法出现严重Bug，请谨慎使用！
-// 若仍想快速刷时间，请进入微信头歌小程序，在对应的实例界面左右滑动，可快速刷到int最大值
+//设置随机测试时间区间上限
+const max = 30000;
+//设置随机测试时间区间下限
+const min = 5000;
+// 目前设置随机时间的方法出现严重Bug，请谨慎使用！若仍想快速刷时间，请进入微信头歌小程序，在对应的实例界面左右滑动，可快速刷到int最大值
 const setRandomTime = false;
 
 (function () {
@@ -42,6 +44,5 @@ const setRandomTime = false;
             });
         });
     }
-
     window.fetch = hookFetch;
 })();
