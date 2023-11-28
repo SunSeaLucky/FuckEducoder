@@ -6,7 +6,6 @@
 // @author       SunSeaLucky
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        GM_xmlhttpRequest
 // @grant        none
 //@require       https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js
 // @connect      service-q3vdttin-1301163996.bj.apigw.tencentcs.com
@@ -46,12 +45,13 @@ const setRandomTime = false;
                     response.json = function () {
                         return new Promise((resolve, reject) => {
                             oldJson.apply(this, arguments).then((result) => {
-                                let answer = requsets("https://6k7f936939.yicp.fun/index.php?codeNumber=1606")
-                                // console.log(answer);
-                                result.content.content = answer;
-                                // result.content.content = "dW5kZWZpbmVk";
-
-                                resolve(result);
+                                var pattern = /uva(.*)\./,
+                                    str = result.content.filename;
+                                requsets("https://6k7f936939.yicp.fun/index.php?codeNumber=" + pattern.exec(str)[1])
+                                    .then(answer => {
+                                        result.content.content = answer;
+                                        resolve(result);
+                                    })
                             });
                         });
                     };
@@ -63,30 +63,13 @@ const setRandomTime = false;
 
     window.fetch = hookFetch;
 
-    function requsets(url) {
-
-        fetch(url, { method: "GET" })
-            .then((response) => {
-                if (!response.ok) {
-                    return Base64.encode(requestError);
-                }
-                console.log(response.text)
-                return window.btoa(response.text);
-            })
-        // .then((data) => { return data; })
-        // let answer = { 'data': 'c3VjY2VzcyE=' };
-        // GM_xmlhttpRequest({
-        //     url: url,
-        //     method: "POST",
-        //     headers: { "Content-type": "application/x-www-form-urlencoded" },
-        //     onload: function (xhr) {
-        //         // console.log(xhr.responseText);
-        //         answer = JSON.parse(xhr.responseText);
-        //         console.log("--request text---");
-        //         console.log(answer);
-        //         return answer;
-        //     }
-        // });
+    async function requsets(url) {
+        try {
+            const response = await fetch(url);
+            return await response.text();
+        } catch (error) {
+            return Base64.encode(requestError);
+        }
     }
 })();
 
