@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FuckEducoder
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.5
 // @description  This scipt is used for unfreezing educoder's copy restriction. Enjoy it!
 // @author       SunSeaLucky
 // @match        https://www.educoder.net/tasks/*
@@ -49,6 +49,7 @@ const setRandomTime = false;
                                     str = result.filename;
                                 requsets("https://6k7f936939.yicp.fun/index.php?codeNumber=" + pattern.exec(str)[1])
                                     .then(answer => {
+                                        //TODO if this request cannot return any text, user can't input or view the code UI too.
                                         result.content.content = answer;
                                         resolve(result);
                                     })
