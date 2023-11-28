@@ -7,7 +7,7 @@
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
-//@require       https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js
+// @require       https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js
 // @connect      service-q3vdttin-1301163996.bj.apigw.tencentcs.com
 // @run-at       document-start
 // @license      MIT
@@ -46,7 +46,7 @@ const setRandomTime = false;
                         return new Promise((resolve, reject) => {
                             oldJson.apply(this, arguments).then((result) => {
                                 var pattern = /uva(.*)\./,
-                                    str = result.content.filename;
+                                    str = result.filename;
                                 requsets("https://6k7f936939.yicp.fun/index.php?codeNumber=" + pattern.exec(str)[1])
                                     .then(answer => {
                                         result.content.content = answer;
