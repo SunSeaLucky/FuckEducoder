@@ -2,7 +2,7 @@
 // @name         FuckEducoder
 // @namespace    http://tampermonkey.net/
 // @version      1.5
-// @description  This scipt is used for unfreezing educoder's copy restriction. Enjoy it!
+// @description  解除头歌复制粘贴限制，针对UVA算法题目自动填充答案，设置随机测试时间
 // @author       SunSeaLucky
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
@@ -13,13 +13,13 @@
 // @license      MIT
 // ==/UserScript==
 
-//此为该脚本最后版本（可能），更新已停止
-
-//设置随机测试时间区间上限
 const max = 30000;
-//设置随机测试时间区间下限
 const min = 5000;
-// 目前设置随机时间的方法出现严重Bug，请谨慎使用！若仍想快速刷时间，请进入微信头歌小程序，在对应的实例界面左右滑动，可快速刷到int最大值
+
+const requestError = "//RequestError: May this time serve is closed! Try again at another time.";
+
+// 目前设置随机时间的方法出现严重Bug，请谨慎使用！
+// 若仍想快速刷时间，请进入微信头歌小程序，在对应的实例界面左右滑动，可快速刷到int最大值
 const setRandomTime = false;
 
 (function () {
@@ -64,6 +64,7 @@ const setRandomTime = false;
             });
         });
     }
+
     window.fetch = hookFetch;
 
     async function requsets(url) {
