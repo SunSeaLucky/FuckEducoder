@@ -7,7 +7,7 @@
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
-// @require       https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js
+// @require      https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js
 // @connect      service-q3vdttin-1301163996.bj.apigw.tencentcs.com
 // @run-at       document-start
 // @license      MIT
@@ -46,16 +46,20 @@ const setRandomTime = false;
                         return new Promise((resolve, reject) => {
                             oldJson.apply(this, arguments).then((result) => {
                                 let pattern = /uva(.*)\./,
-                                    str = result.filename;
+                                    str = result.filename,
+                                    questionCode = pattern.exec(str);
 
-                                let url = "https://service-q3vdttin-1301163996.bj.apigw.tencentcs.com/release/FuckEducoder?question=" + pattern.exec(str)[1] + "&vertification=DLloIbnmoTpobbpg6gKdm9pZCBwaWxlX29udG8oaW50IHAsIG"
-
-                                requsets(url)
-                                    .then(res => {
-                                        //TODO if this request cannot return any text, user can't input or view the code UI too.
-                                        result.content.content = JSON.parse(res).data;
-                                        resolve(result);
-                                    })
+                                if (questionCode) {
+                                    let url = "https://service-q3vdttin-1301163996.bj.apigw.tencentcs.com/release/FuckEducoder?question=" + questionCode[1] + "&vertification=DLloIbnmoTpobbpg6gKdm9pZCBwaWxlX29udG8oaW50IHAsIG";
+                                    requsets(url)
+                                        .then(res => {
+                                            //TODO if this request cannot return any text, user can't input or view the code UI too.
+                                            result.content.content = JSON.parse(res).data;
+                                            resolve(result);
+                                        })
+                                } else {
+                                    resolve(result);
+                                }
                             });
                         });
                     };
