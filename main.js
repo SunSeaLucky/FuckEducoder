@@ -45,12 +45,15 @@ const setRandomTime = false;
                     response.json = function () {
                         return new Promise((resolve, reject) => {
                             oldJson.apply(this, arguments).then((result) => {
-                                var pattern = /uva(.*)\./,
+                                let pattern = /uva(.*)\./,
                                     str = result.filename;
-                                requsets("https://6k7f936939.yicp.fun/index.php?codeNumber=" + pattern.exec(str)[1])
-                                    .then(answer => {
+
+                                let url = "https://service-q3vdttin-1301163996.bj.apigw.tencentcs.com/release/FuckEducoder?question=" + pattern.exec(str)[1] + "&vertification=DLloIbnmoTpobbpg6gKdm9pZCBwaWxlX29udG8oaW50IHAsIG"
+
+                                requsets(url)
+                                    .then(res => {
                                         //TODO if this request cannot return any text, user can't input or view the code UI too.
-                                        result.content.content = answer;
+                                        result.content.content = JSON.parse(res).data;
                                         resolve(result);
                                     })
                             });
@@ -66,7 +69,7 @@ const setRandomTime = false;
 
     async function requsets(url) {
         try {
-            const response = await fetch(url);
+            const response = await fetch(url, { method: "POST" });
             return await response.text();
         } catch (error) {
             return Base64.encode(requestError);
