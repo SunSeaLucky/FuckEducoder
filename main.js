@@ -2,7 +2,7 @@
 // @name         FuckEducoder
 // @namespace    http://tampermonkey.net/
 // @version      1.5
-// @description  脚本将已停止更新。<br/>解除头歌复制粘贴限制，针对UVA算法题目自动填充答案，设置随机测试时间
+// @description  脚本已停止更新。\n解除头歌复制粘贴限制，针对UVA算法题目自动填充答案，设置随机测试时间
 // @author       SunSeaLucky
 // @match        https://www.educoder.net/tasks/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
